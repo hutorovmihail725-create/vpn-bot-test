@@ -16,15 +16,15 @@ async def start(message: types.Message):
     keyboard = types.InlineKeyboardMarkup(inline_keyboard=[
         [types.InlineKeyboardButton(text="Купить VPN", callback_data="buy_vpn")]
     ])
-    await message.answer("Привет! Это тестовый VPN бот.\nНажми кнопку:", reply_markup=keyboard)
+    await message.answer("Привет! Тестовый бот на Railway.\nНажми кнопку:", reply_markup=keyboard)
 
 @dp.callback_query(F.data == "buy_vpn")
 async def buy_vpn(callback: types.CallbackQuery):
     await callback.answer("Работает!")
-    await callback.message.answer("✅ Бот на Railway работает!")
+    await callback.message.answer("✅ Бот работает через Webhook!")
 
 async def main():
-    print("Бот запущен на Railway!")
+    await bot.delete_webhook(drop_pending_updates=True)
     await dp.start_polling(bot)
 
 if __name__ == "__main__":
